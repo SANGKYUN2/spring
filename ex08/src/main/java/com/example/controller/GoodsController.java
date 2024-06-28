@@ -33,6 +33,29 @@ public class GoodsController {
 		@Autowired
 		GoodsDAO dao;
 		
+		//관련상품목록
+		@GetMapping("/related/list/{gid}")
+		public List<HashMap<String, Object>> listRelated(@PathVariable("gid") String gid) {
+				return dao.listRelated(gid);
+		}
+		
+		//관련상품등록
+		@PostMapping("/related/insert")
+		public int insertRelated(@RequestBody HashMap<String, Object> map) {
+				String rid = map.get("rid").toString();
+				String gid = map.get("gid").toString();
+				return service.insertRelated(gid, rid);
+		}
+		
+		//관련상품삭제
+		@PostMapping("/related/delete")
+		public void deletetRelated(@RequestBody HashMap<String, Object> map) {
+			//int intID = (int)map.get("IntID");
+			String rid = map.get("rid").toString();
+			String gid = map.get("gid").toString();
+			dao.deleteRelated(gid, rid);
+		}
+		
 		//첨부파일삭제
 		@PostMapping("/attach/delete")
 		public void deleteAttach(@RequestBody AttachVO vo) {

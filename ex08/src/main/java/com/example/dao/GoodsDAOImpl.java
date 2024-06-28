@@ -80,4 +80,35 @@ public class GoodsDAOImpl implements GoodsDAO {
 			
 		}
 
+		@Override
+		public void insertRelated(String gid, String rid) {
+				HashMap<String, Object> map = new HashMap<>();
+				map.put("gid", gid);
+				map.put("rid", rid);
+				session.insert(namespace + ".insertRelated", map);
+			
+		}
+
+		@Override
+		public int countRelated(String gid, String rid) {
+				HashMap<String, Object> map = new HashMap<>();
+				map.put("gid", gid);
+				map.put("rid", rid);
+				return session.selectOne(namespace + ".countRelated", map);
+		}
+
+		@Override
+		public List<HashMap<String, Object>> listRelated(String gid) {
+				return session.selectList(namespace + ".listRelated", gid);
+		}
+
+		@Override
+		public void deleteRelated(String gid, String rid) {
+				HashMap<String, Object> map = new HashMap<>();
+				map.put("gid", gid);
+				map.put("rid", rid);
+				session.delete(namespace + ".deleteRelated", map);
+			
+		}
+
 }

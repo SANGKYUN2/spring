@@ -29,10 +29,18 @@ public class GoodsServiceImpl implements GoodsService {
 
 		@Override
 		public HashMap<String, Object> list(QueryVO vo) {
-			HashMap<String, Object> map = new HashMap<String, Object>();
-			map.put("list", dao.list(vo));
-			map.put("total", dao.total());
-			return map;
+				HashMap<String, Object> map = new HashMap<String, Object>();
+				map.put("list", dao.list(vo));
+				map.put("total", dao.total());
+				return map;
+		}
+
+		@Transactional
+		@Override
+		public int insertRelated(String gid, String rid) {
+				int count = dao.countRelated(gid, rid);
+				if(count==0) dao.insertRelated(gid, rid);
+				return count;
 		}
 		
 

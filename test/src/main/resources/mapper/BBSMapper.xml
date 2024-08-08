@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.BBSMapper">
+
+	<select id="bbs_list" resultType="hashmap">
+		select * from bbs;
+	</select>
+	
+	<select id="bbs_total" resultType="int">
+		select count(*) as bbs_total from bbs;
+	</select>
+	
+	<insert id="bbs_insert">
+		insert into bbs (bbs_title, bbs_contents, bbs_writer)
+		values (#{bbs_title}, #{bbs_contents}, #{bbs_writer})
+	</insert>
+	
+	<select id="bbs_read" resultType="BBSVO">
+		select * from bbs where bbs_key=#{bbs_key}
+	</select>
+	
+	<delete id="bbs_delete">
+		delete from bbs where bbs_key=#{bbs_key}
+	</delete>
+	
+	<update id="bbs_update">
+		update bbs set bbs_title=#{bbs_title}, bbs_contents=#{bbs_contents} where bbs_key=#{bbs_key}
+	</update>
+ 	
+</mapper>
